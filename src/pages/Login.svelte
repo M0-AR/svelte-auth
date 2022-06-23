@@ -1,13 +1,31 @@
-<main>
-    <form class="form-signin">
-        <h1 class="h3 mb-3 font-normal">Please sign in</h1>
+<script>
+    import axios from 'axios';
+    import {push} from 'svelte-spa-router'
 
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    let email = '', password = '';
 
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    $: submit = async () => {
+        const {data} = await axios.post('http://localhost:8000/api/login', {
+            email,
+            password
+        }, {withCredentials: true});
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
+        await push('/');
+    }
+</script>
+
+<main class="form-signin">
+    <form on:submit|preventDefault={submit}>
+        <h1 class="h3 mb-3 font-normal">Please register</h1>
+
+        <label class="sr-only">Email address</label>
+        <input bind:value={email} type="email" class="form-control" placeholder="Email address" required autofocus>
+
+        <label class="sr-only">Password</label>
+        <input bind:value={password} type="password" class="form-control" placeholder="Password" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
 </main>
