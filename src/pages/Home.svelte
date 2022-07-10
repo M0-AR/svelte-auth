@@ -1,1 +1,16 @@
-Hello
+<script>
+    import {onMount} from 'svelte';
+    import axios from 'axios';
+
+    let message = 'You are not logged in';
+
+    onMount(async () => {
+        const {data} = await axios.get('http://localhost:8000/api/user');
+
+        message = `Hi ${data.first_name} ${data.last_name}`;
+    });
+</script>
+
+<div class="container mt-5 text-center">
+   <h3>{message}</h3>
+</div>
