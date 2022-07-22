@@ -5,6 +5,7 @@
     import Router, {link} from 'svelte-spa-router'
     import {onMount} from "svelte";
     import axios from "axios";
+    import {authenticated} from "./store/auth";
 
     const routes = {
         '/': Home,
@@ -14,19 +15,14 @@
 
     let auth = false;
 
-    onMount(async () => {
-        await axios.get('user').then(res => {
-            if (res.status === 200) {
-                console.log(res)
-                auth = true;
-            }
-            auth = false;
-        }).catch(e => {
-        });
-    });
+    authenticated.subscribe(value => auth = value);
 
     $: logout = async () => {
         await axios.post('logout', {}, {withCredentials: true});
+
+        axios.defaults.headers.common['Authorization'] = '';
+
+        authenticated.set(false);
     }
 </script>
 
