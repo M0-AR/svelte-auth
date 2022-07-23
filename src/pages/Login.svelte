@@ -1,6 +1,6 @@
 <script>
     import axios from 'axios';
-    import {push} from 'svelte-spa-router'
+    import {push, link} from 'svelte-spa-router'
     import {authenticated} from "../store/auth";
 
     let email = '', password = '';
@@ -23,11 +23,19 @@
     <form on:submit|preventDefault={submit}>
         <h1 class="h3 mb-3 font-normal">Please register</h1>
 
-        <label class="sr-only">Email address</label>
-        <input bind:value={email} type="email" class="form-control" placeholder="Email address" required autofocus>
+        <div class="form-floating">
+            <label class="sr-only">Email address</label>
+            <input bind:value={email} type="email" class="form-control" placeholder="Email address" required autofocus>
+        </div>
 
-        <label class="sr-only">Password</label>
-        <input bind:value={password} type="password" class="form-control" placeholder="Password" required>
+        <div class="form-floating">
+            <label class="sr-only">Password</label>
+            <input bind:value={password} type="password" class="form-control" placeholder="Password" required>
+        </div>
+
+        <div class="mb-3">
+            <a href="/forget" use:link>Forgot Your password?</a>
+        </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
