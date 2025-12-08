@@ -1,107 +1,117 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework and don't mind using pre-1.0 software — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
+# Svelte Authentication Frontend
 
----
+This project is a frontend application built with Svelte and TypeScript that provides a complete user authentication system. It includes features for user registration, login, password reset, and session management with JWT. The application is designed to be a starting point for building secure web applications.
 
-# svelte app
+## Table of Contents
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+* [For Business People](#for-business-people)
+  * [Project Overview](#project-overview)
+  * [Key Features](#key-features)
+  * [Target Audience](#target-audience)
+* [For Technical People](#for-technical-people)
+  * [Tech Stack](#tech-stack)
+  * [Project Structure](#project-structure)
+  * [Getting Started](#getting-started)
+  * [API Endpoints](#api-endpoints)
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## For Business People
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+### Project Overview
+
+This project provides a ready-to-use frontend for user authentication, which can be easily integrated into any new or existing web application. By handling the complexities of user login, registration, and password management, it allows development teams to focus on core business features, accelerating time-to-market.
+
+### Key Features
+
+* **User Registration:** New users can create an account.
+* **User Login:** Registered users can log in to access protected content.
+* **Password Reset:** Users can securely reset their password if they forget it.
+* **Session Management:** The application uses JSON Web Tokens (JWT) to manage user sessions, ensuring secure and persistent authentication.
+
+### Target Audience
+
+This project is intended for businesses and development teams that need to quickly implement a secure and reliable authentication system for their web applications. It is particularly useful for startups and companies that want to reduce development time and costs.
+
+## For Technical People
+
+### Tech Stack
+
+* **Svelte:** A modern JavaScript compiler that allows you to write easy-to-understand JavaScript code that gets compiled to highly efficient, imperative code that runs in the browser.
+* **TypeScript:** A statically typed superset of JavaScript that adds type safety to the project.
+* **Rollup:** A module bundler for JavaScript which compiles small pieces of code into something larger and more complex, such as a library or application.
+* **Svelte SPA Router:** A lightweight and easy-to-use router for Svelte single-page applications.
+* **Axios:** A promise-based HTTP client for the browser and Node.js, used for making API requests.
+
+### Project Structure
+
+```
+.
+├── public
+│   └── build
+│       ├── bundle.css
+│       └── bundle.js
+├── src
+│   ├── components
+│   │   └── Nav.svelte
+│   ├── interceptors
+│   │   └── axios.ts
+│   ├── pages
+│   │   ├── Forgot.svelte
+│   │   ├── Home.svelte
+│   │   ├── Login.svelte
+│   │   ├── Register.svelte
+│   │   └── Reset.svelte
+│   ├── store
+│   │   └── auth.ts
+│   ├── App.svelte
+│   └── main.ts
+├── package.json
+├── rollup.config.js
+└── tsconfig.json
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+### Getting Started
 
+#### Prerequisites
 
-## Get started
+* Node.js and npm installed on your machine.
 
-Install the dependencies...
+#### Installation
 
-```bash
-cd svelte-app
-npm install
-```
+1. Clone the repository:
+   ```sh
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd <project-directory>
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
 
-...then start [Rollup](https://rollupjs.org):
+#### Running the Application
 
-```bash
-npm run dev
-```
+* To run the application in development mode with live reloading:
+  ```sh
+  npm run dev
+  ```
+* To build the application for production:
+  ```sh
+  npm run build
+  ```
+* To start the production server:
+  ```sh
+  npm run start
+  ```
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+### API Endpoints
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+The application interacts with a backend API for authentication. The base URL for the API is `http://localhost:8000/api/`.
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
-
-```js
-"start": "sirv public --single"
-```
-
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+* `POST /login`: Authenticates a user and returns a JWT.
+* `POST /register`: Registers a new user.
+* `POST /forgot`: Sends a password reset link to the user's email.
+* `POST /reset`: Resets the user's password.
+* `GET /user`: Retrieves the currently authenticated user's information.
+* `POST /refresh`: Refreshes the JWT to maintain the user's session.
